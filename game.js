@@ -18648,12 +18648,19 @@ function Page() {
 			{
 				transform: "translate(0,-6px) scale(1.06)",
 				opacity: 1,
-				offset: .18
+				offset: .12,
+				easing: "ease-out"
 			},
 			{
-				transform: "translate(0,-48px) scale(1)",
+				transform: "translate(0,-64px) scale(1)",
 				opacity: 1,
 				offset: .48
+			},
+			{
+				transform: "translate(0,-64px) scale(1)",
+				opacity: 1,
+				offset: .6,
+				easing: "ease-in"
 			},
 			{
 				transform: `translate(${dx}px,${dy}px) scale(.35)`,
@@ -18661,8 +18668,8 @@ function Page() {
 				offset: 1
 			}
 		], {
-			duration: 720,
-			easing: "ease-in",
+			duration: 800,
+			easing: "linear",
 			fill: "forwards"
 		});
 		let pulse;
