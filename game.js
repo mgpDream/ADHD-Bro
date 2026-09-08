@@ -18722,8 +18722,8 @@ function Page() {
 		save(n);
 		setReward(n.votes);
 		happyReward();
-		const dropChest = !n.chestPending && Math.random() < .3;
-		const offerAd = !dropChest && !n.chestPending && n.batch?.endless && Math.random() < .035;
+		const dropChest = !n.chestPending && Math.random() < .05;
+		const offerAd = !dropChest && !n.chestPending && n.batch?.endless && Math.random() < .1;
 		setTimeout(() => {
 			setPair(ref.current.batch?.pair || []);
 			setHit(-1);
