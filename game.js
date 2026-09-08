@@ -18651,9 +18651,9 @@ function Page() {
 				offset: .18
 			},
 			{
-				transform: "translate(0,-6px) scale(1)",
+				transform: "translate(0,-48px) scale(1)",
 				opacity: 1,
-				offset: .42
+				offset: .48
 			},
 			{
 				transform: `translate(${dx}px,${dy}px) scale(.35)`,
