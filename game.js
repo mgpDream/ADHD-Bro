@@ -18633,6 +18633,58 @@ function Page() {
 			happyReward();
 		}, 5e3);
 	}
+	(0, import_react.useEffect)(() => {
+		if (!reward) return;
+		const el = document.querySelector(".vote-reward"), target = document.querySelector("nav .resource-count");
+		if (!el || !target) return;
+		const a = el.getBoundingClientRect(), b = target.getBoundingClientRect();
+		const dx = b.left + b.width / 2 - a.left - a.width / 2, dy = b.top + b.height / 2 - a.top - a.height / 2;
+		const flight = el.animate([
+			{
+				transform: "translate(0,0) scale(.85)",
+				opacity: 0,
+				offset: 0
+			},
+			{
+				transform: "translate(0,-6px) scale(1.06)",
+				opacity: 1,
+				offset: .18
+			},
+			{
+				transform: "translate(0,-6px) scale(1)",
+				opacity: 1,
+				offset: .42
+			},
+			{
+				transform: `translate(${dx}px,${dy}px) scale(.35)`,
+				opacity: 0,
+				offset: 1
+			}
+		], {
+			duration: 720,
+			easing: "ease-in",
+			fill: "forwards"
+		});
+		let pulse;
+		flight.onfinish = () => {
+			pulse = target.animate([
+				{ transform: "scale(1)" },
+				{
+					transform: "scale(1.2)",
+					color: "#fff1a0"
+				},
+				{ transform: "scale(1)" }
+			], {
+				duration: 300,
+				easing: "ease-out"
+			});
+		};
+		return () => {
+			flight.onfinish = null;
+			flight.cancel();
+			pulse?.cancel();
+		};
+	}, [reward]);
 	function closeBatch() {
 		if (!ref.current) return;
 		save({
@@ -18885,11 +18937,7 @@ function Page() {
 				reward > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "vote-reward",
 					role: "status",
-					children: [
-						"+5 ",
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrainCoin, {}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("small", { children: "Мяу, мяу, мяу ♡" })
-					]
+					children: ["+5 ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrainCoin, {})]
 				}, reward),
 				!s.batch && s.votes > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 					className: "batch-done",
